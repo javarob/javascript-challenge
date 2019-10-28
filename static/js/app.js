@@ -6,10 +6,11 @@ var tableData = data;
 var table = d3.select("#ufo-table");
 var tableBody = table.select("tbody");
 var filterButton = d3.select("#filter-btn");
-
+var menuOptions = d3.select("#menuoptions");
 var buttonSearchField = d3.select("#datetime");
 // var seriesSearchField = d3.select("#seriesSearch");
-var resetButton = d3.select("#resetAllButton")
+var showAllButton = d3.select("#showAll-btn");
+var clearButton = d3.select("#clear-btn");
 
 var ufoData = data;
 
@@ -27,51 +28,111 @@ function createDefault() {
 }
 //createDefault();
 
-resetButton.on("click", () => {
+showAllButton.on("click", () => {
     tableBody.remove();
     tableBody = table.append("tbody");
     createDefault();
 });
 
-// seriesSearchField.on("keyup", () => {
-//     var seriesToSearchFor = seriesSearchField.property("value");
-//     if (seriesToSearchFor.length >= 3) {
+clearButton.on("click", () => {
+    tableBody.remove();
+    tableBody = table.append("tbody");
+});
 
-
-//         tableBody.remove();
-//         tableBody = table.append("tbody");
-
-//         fighters.filter(f => f.series.toLowerCase().trim() == seriesToSearchFor.toLowerCase().trim())
-//             .forEach(fighter => {
-//                 row = tableBody.append("tr")
-//                 row.append("td").text(sighting.datetime);
-//                 row.append("td").text(sighting.city);
-//                 row.append("td").text(sighting.state);
-//                 row.append("td").text(sighting.country);
-//                 row.append("td").text(sighting.shape);
-//                 row.append("td").text(sighting.durationMinutes);
-//                 row.append("td").text(sighting.comments);
-//             });
-
-//     }
-// });
+menuOptions.on("change", () => {
+    var menuOption = menuOptions.node().value;
+    var dateToSearchFor = buttonSearchField.property("value");
+    console.log(menuOption, dateToSearchFor)
+})
 
 filterButton.on("click", () => {
     var dateToSearchFor = buttonSearchField.property("value");
-    console.log(dateToSearchFor);
-    tableBody.remove();
-    tableBody = table.append("tbody");
+    var menuOption = menuOptions.node().value
 
-    ufoData.filter(f => f.datetime.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
-        .forEach(sighting => {
-            row = tableBody.append("tr")
-            row.append("td").text(sighting.datetime);
-            row.append("td").text(sighting.city);
-            row.append("td").text(sighting.state);
-            row.append("td").text(sighting.country);
-            row.append("td").text(sighting.shape);
-            row.append("td").text(sighting.durationMinutes);
-            row.append("td").text(sighting.comments);
-        });
+    if (menuOption === "Date") {
+        tableBody.remove();
+        tableBody = table.append("tbody");
+        console.log(menuOption, dateToSearchFor)
+
+        ufoData.filter(f => f.datetime.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
+            .forEach(sighting => {
+                row = tableBody.append("tr")
+                row.append("td").text(sighting.datetime);
+                row.append("td").text(sighting.city);
+                row.append("td").text(sighting.state);
+                row.append("td").text(sighting.country);
+                row.append("td").text(sighting.shape);
+                row.append("td").text(sighting.durationMinutes);
+                row.append("td").text(sighting.comments);
+            });
+    }
+    else if (menuOption === "City") {
+        tableBody.remove();
+        tableBody = table.append("tbody");
+        console.log(menuOption, dateToSearchFor)
+
+        ufoData.filter(f => f.city.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
+            .forEach(sighting => {
+                row = tableBody.append("tr")
+                row.append("td").text(sighting.datetime);
+                row.append("td").text(sighting.city);
+                row.append("td").text(sighting.state);
+                row.append("td").text(sighting.country);
+                row.append("td").text(sighting.shape);
+                row.append("td").text(sighting.durationMinutes);
+                row.append("td").text(sighting.comments);
+            });
+    }
+    else if (menuOption === "State") {
+        tableBody.remove();
+        tableBody = table.append("tbody");
+        console.log(menuOption, dateToSearchFor)
+
+        ufoData.filter(f => f.state.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
+            .forEach(sighting => {
+                row = tableBody.append("tr")
+                row.append("td").text(sighting.datetime);
+                row.append("td").text(sighting.city);
+                row.append("td").text(sighting.state);
+                row.append("td").text(sighting.country);
+                row.append("td").text(sighting.shape);
+                row.append("td").text(sighting.durationMinutes);
+                row.append("td").text(sighting.comments);
+            });
+    }
+    else if (menuOption === "Country") {
+        tableBody.remove();
+        tableBody = table.append("tbody");
+        console.log(menuOption, dateToSearchFor)
+
+        ufoData.filter(f => f.country.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
+            .forEach(sighting => {
+                row = tableBody.append("tr")
+                row.append("td").text(sighting.datetime);
+                row.append("td").text(sighting.city);
+                row.append("td").text(sighting.state);
+                row.append("td").text(sighting.country);
+                row.append("td").text(sighting.shape);
+                row.append("td").text(sighting.durationMinutes);
+                row.append("td").text(sighting.comments);
+            });
+    }
+    else if (menuOption === "Shape") {
+        tableBody.remove();
+        tableBody = table.append("tbody");
+        console.log(menuOption, dateToSearchFor)
+
+        ufoData.filter(f => f.shape.toLowerCase().trim() == dateToSearchFor.toLowerCase().trim())
+            .forEach(sighting => {
+                row = tableBody.append("tr")
+                row.append("td").text(sighting.datetime);
+                row.append("td").text(sighting.city);
+                row.append("td").text(sighting.state);
+                row.append("td").text(sighting.country);
+                row.append("td").text(sighting.shape);
+                row.append("td").text(sighting.durationMinutes);
+                row.append("td").text(sighting.comments);
+            });
+    }
 
 })
